@@ -47,10 +47,3 @@ This is a complete movie review web platform developed as part of a university p
 - `MovieRequests` - Requested new movies  
 - `ContactMessages` - Messages sent via the Contact page
 
-## 📸 Screenshots
-
-> Add your screenshots here showing Home Page, Admin Panel, Movie Details, Register/Login, etc.
-
-## 🔗 Link
-
-👉 GitHub: `https://github.com/vladbanta/portfolio/tree/main/MovieReviews`
