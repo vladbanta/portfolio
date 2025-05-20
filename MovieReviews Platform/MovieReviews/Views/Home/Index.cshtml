@@ -1,0 +1,62 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="~/styles.css">
+</head>
+<body>
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-success" role="alert" style="margin-bottom: 20px; text-align: center;">
+            @TempData["Message"]
+        </div>
+    }
+
+    <nav>
+        <ul class="navbar">
+            <li><a href="/Home/Index">Home</a></li>
+            <li><a href="/Movies">Movies</a></li>
+            <li><a href="/FanTheory">Fan Theories</a></li>
+            <li><a href="/MovieRequest">Request Movie</a></li>
+            <li><a href="/Home/About">About Us</a></li>
+            <li><a href="/Contact">Contact</a></li>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <li><a href="/Account/Logout">Logout (@User.Identity.Name)</a></li>
+            }
+            else
+            {
+                <li><a href="/Account/Login">Login</a></li>
+            }
+        </ul>
+    </nav>
+
+  
+
+    <div class="container">
+        <h1>Welcome to Movie Reviews</h1>
+        <p>Discover the latest movie reviews and ratings from passionate movie enthusiasts. Our platform allows users to explore detailed reviews, share their own opinions, and find the best-rated films.</p>
+
+        <h2>What You Can Do Here</h2>
+        <ul>
+            <li>Read detailed reviews of the latest and greatest movies.</li>
+            <li>Check out top-rated films recommended by our community.</li>
+            <li>Submit your own reviews and share your perspective.</li>
+            <li>Contact us for any inquiries or feedback.</li>
+        </ul>
+
+        <p>Want to get in touch? Click below to reach out to us!</p>
+        <a href="/Contact" class="btn">Contact Us</a>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2025 Movie Reviews. All rights reserved.</p>
+    </div>
+</body>
+</html>

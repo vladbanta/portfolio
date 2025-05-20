@@ -1,0 +1,65 @@
+﻿@model MovieReviews.Models.MovieRequest
+
+@{
+    ViewData["Title"] = "Request Movie";
+}
+
+<nav style="display: flex; justify-content: space-between;">
+    <ul>
+        <li><a href="/Home/Index">Home</a></li>
+        <li><a href="/Movies">Movies</a></li>
+        <li><a href="/FanTheory">Fan Theories</a></li>
+        <li><a href="/MovieRequest">Request Movie</a></li>
+        <li><a href="/Home/About">About Us</a></li>
+        <li><a href="/Contact">Contact</a></li>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <li><a href="/Account/Logout">Logout (@User.Identity.Name)</a></li>
+        }
+        else
+        {
+            <li><a href="/Account/Login">Login</a></li>
+        }
+    </ul>
+</nav>
+
+<div class="container contact-container">
+    <h1>Request a Movie</h1>
+
+    @if (ViewBag.Message != null)
+    {
+        <div class="alert alert-success">@ViewBag.Message</div>
+    }
+
+    <form asp-action="Index" method="post" class="contact-form">
+        <div asp-validation-summary="All" class="text-danger"></div>
+
+        <label asp-for="Name">Name</label>
+        <input asp-for="Name" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+
+        <label asp-for="Email">Email</label>
+        <input asp-for="Email" type="email" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+
+        <label asp-for="MovieTitle">Movie Title</label>
+        <input asp-for="MovieTitle" />
+        <span asp-validation-for="MovieTitle" class="text-danger"></span>
+
+        <label asp-for="Reason">Why do you want this movie?</label>
+        <textarea asp-for="Reason" rows="5"></textarea>
+        <span asp-validation-for="Reason" class="text-danger"></span>
+
+        <div style="display: flex; gap: 10px;">
+            <button type="submit" class="btn btn-success" style="flex: 1;">Send Request</button>
+            @if (User.IsInRole("Admin"))
+                {
+            <a class="btn btn-primary" asp-action="Requests" style="flex: 1; text-align: center; padding: 10px;">See Requests</a>
+                }
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

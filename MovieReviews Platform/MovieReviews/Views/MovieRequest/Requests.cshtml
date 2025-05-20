@@ -1,0 +1,52 @@
+﻿@model IEnumerable<MovieReviews.Models.MovieRequest>
+
+@{
+    ViewData["Title"] = "Movie Requests";
+}
+
+<nav>
+    <ul>
+        <li><a href="/Home/Index">Home</a></li>
+        <li><a href="/Movies">Movies</a></li>
+        <li><a href="/FanTheory">Fan Theories</a></li>
+        <li><a href="/MovieRequest">Request Movie</a></li>
+        <li><a href="/Home/About">About Us</a></li>
+        <li><a href="/Contact">Contact</a></li>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <li><a href="/Account/Logout">Logout (@User.Identity.Name)</a></li>
+        }
+        else
+        {
+            <li><a href="/Account/Login">Login</a></li>
+        }
+
+    </ul>
+</nav>
+
+<div class="container">
+    <h1>Movie Requests</h1>
+    <p>Here are the movies users have requested and why!</p>
+
+    @foreach (var req in Model)
+    {
+        <div class="theory">
+            <div class="theory-details">
+                <h2>@req.MovieTitle</h2>
+
+                <p><strong>Requested by:</strong> @req.Name (@req.Email)</p>
+                <p><strong>Reason:</strong> @req.Reason</p>
+
+                <div style="margin-top: 15px;">
+                    <a asp-action="Details" asp-route-id="@req.MovieRequestId" class="btn">Details</a>
+                    <a asp-action="Edit" asp-route-id="@req.MovieRequestId" class="btn">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@req.MovieRequestId" class="btn" style="background: #dc3545;">Delete</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<div class="footer">
+    <p>&copy; 2025 Movie Reviews. All rights reserved.</p>
+</div>

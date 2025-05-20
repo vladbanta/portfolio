@@ -1,0 +1,16 @@
+﻿@model MovieReviews.Models.FanTheory
+
+@{
+    ViewData["Title"] = "Delete Fan Theory";
+}
+
+<div class="container">
+    <h1>Delete Fan Theory</h1>
+    <p>Are you sure you want to delete "<strong>@Model.Title</strong>"?</p>
+
+    <form asp-action="DeleteConfirmed">
+        <input type="hidden" asp-for="FanTheoryId" />
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>

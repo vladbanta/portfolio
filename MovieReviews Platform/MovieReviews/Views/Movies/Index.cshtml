@@ -1,0 +1,89 @@
+﻿@model IEnumerable<MovieReviews.Models.Movie>
+
+@{
+    ViewData["Title"] = "Movies";
+}
+
+<nav style="display: flex; justify-content: space-between;">
+    <ul>
+        <li><a href="/Home/Index">Home</a></li>
+        <li><a href="/Movies">Movies</a></li>
+        <li><a href="/FanTheory">Fan Theories</a></li>
+        <li><a href="/MovieRequest">Request Movie</a></li>
+        <li><a href="/Home/About">About Us</a></li>
+        <li><a href="/Contact">Contact</a></li>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <li><a href="/Account/Logout">Logout (@User.Identity.Name)</a></li>
+        }
+        else
+        {
+            <li><a href="/Account/Login">Login</a></li>
+        }
+    </ul>
+</nav>
+
+<div class="container">
+    <h1>Movies List</h1>
+    <form asp-action="Index" method="get" style="margin-bottom: 20px; display: flex; gap: 10px;">
+        <input type="text" name="searchString" placeholder="Search movies..." class="form-control" style="flex: 1; padding: 8px; border-radius: 10px; border: 1px solid #ccc;">
+        <button type="submit" class="btn btn-primary" style="padding: 8px 20px; border-radius: 10px;">Search</button>
+    </form>
+
+
+    @if (User.IsInRole("Admin"))
+    {
+        <p>
+            <a class="btn" asp-action="Create">Create New Movie</a>
+        </p>
+    }
+    @foreach (var movie in Model)
+    {
+        <div class="movie">
+            <img src="@movie.ImageUrl" alt="@movie.Title">
+            <div class="movie-details">
+                <h2>@movie.Title</h2>
+                <p class="rating">
+                    <strong>Rating:</strong>
+                    @{
+                        double rating = movie.Rating / 2; // rating din 10 -> 5 stele
+                        int fullStars = (int)Math.Floor(rating);
+                        bool hasHalfStar = (rating - fullStars) >= 0.5;
+                        int emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+
+                        for (int i = 0; i < fullStars; i++)
+                        {
+                            @Html.Raw("★")
+                        }
+                        if (hasHalfStar)
+                        {
+                            @Html.Raw("⯨")
+                        }
+                        for (int i = 0; i < emptyStars; i++)
+                        {
+                            @Html.Raw("☆")
+                        }
+                    }
+                    (@movie.Rating.ToString("0.0") / 10)
+                </p>
+
+                <p><strong>Review:</strong> @movie.Description</p>
+                @if (User.IsInRole("Admin"))
+                {
+                    <p>
+                        <a asp-action="Edit" asp-route-id="@movie.MovieId">Edit</a> |
+                        <a asp-action="Delete" asp-route-id="@movie.MovieId">Delete</a> |
+
+                    </p>
+                }
+                @if (User.IsInRole("User"))
+                {
+                    <p>
+                        <a asp-action="Details" asp-route-id="@movie.MovieId">Details</a> |
+                        <a asp-controller="Review" asp-action="ForMovie" asp-route-id="@movie.MovieId">User Reviews</a>
+                </p>
+                }
+            </div>
+        </div>
+    }
+</div>

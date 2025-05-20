@@ -1,0 +1,54 @@
+﻿@model IEnumerable<MovieReviews.Models.ContactMessage>
+
+@{
+    ViewData["Title"] = "Contact Messages";
+}
+
+<nav>
+    <ul>
+        <li><a href="/Home/Index">Home</a></li>
+        <li><a href="/Movies">Movies</a></li>
+        <li><a href="/FanTheory">Fan Theories</a></li>
+        <li><a href="/MovieRequest">Request Movie</a></li>
+        <li><a href="/Home/About">About Us</a></li>
+        <li><a href="/Contact">Contact</a></li>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <li><a href="/Account/Logout">Logout (@User.Identity.Name)</a></li>
+        }
+        else
+        {
+            <li><a href="/Account/Login">Login</a></li>
+        }
+    </ul>
+</nav>
+
+<div class="container">
+    <h1>Contact Messages</h1>
+    <p>Messages sent by users through the contact form!</p>
+
+    @foreach (var msg in Model)
+    {
+        <div class="theory">
+            <div class="theory-details">
+                <h2>@msg.Name</h2>
+
+                <p><strong>Email:</strong> @msg.Email</p>
+                <p><strong>Message:</strong> @msg.Message</p>
+
+                @if (User.IsInRole("Admin"))
+                {
+                    <div style="margin-top: 15px;">
+                        <a asp-action="Details" asp-route-id="@msg.ContactMessageId" class="btn">Details</a>
+                    <a asp-action="Edit" asp-route-id="@msg.ContactMessageId" class="btn">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@msg.ContactMessageId" class="btn" style="background: #dc3545;">Delete</a>
+                </div>
+                }
+            </div>
+        </div>
+    }
+</div>
+
+<div class="footer">
+    <p>&copy; 2025 Movie Reviews. All rights reserved.</p>
+</div>

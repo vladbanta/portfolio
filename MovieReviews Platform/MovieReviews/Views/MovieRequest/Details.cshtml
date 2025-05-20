@@ -1,0 +1,16 @@
+﻿@model MovieReviews.Models.MovieRequest
+
+@{
+    ViewData["Title"] = "Movie Request Details";
+}
+
+<div class="container contact-container">
+    <h1>Movie Request Details</h1>
+
+    <p><strong>Name:</strong> @Model.Name</p>
+    <p><strong>Email:</strong> @Model.Email</p>
+    <p><strong>Movie Title:</strong> @Model.MovieTitle</p>
+    <p><strong>Reason:</strong> @Model.Reason</p>
+
+    <a asp-action="Requests" class="btn btn-secondary">Back to Requests</a>
+</div>

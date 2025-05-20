@@ -1,0 +1,15 @@
+﻿@model MovieReviews.Models.FanTheory
+
+@{
+    ViewData["Title"] = "Fan Theory Details";
+}
+
+<div class="container contact-container">
+    <h1>@Model.Title</h1>
+
+    <p><strong>Movie:</strong> @Model.Movie?.Title</p>
+    <p><strong>Theory:</strong> @Model.Theory</p>
+    <p><strong>Why it might be true?</strong> @Model.Reason</p>
+
+    <a asp-action="Index" class="btn btn-secondary">Back to Theories</a>
+</div>

@@ -1,0 +1,34 @@
+﻿@model MovieReviews.Models.Movie
+
+@{
+    ViewData["Title"] = "Movie Details";
+}
+
+<h1>Movie Details</h1>
+
+<div class="movie-form">
+    <div class="form-group">
+        <label>Title:</label>
+        <p>@Model.Title</p>
+    </div>
+
+    <div class="form-group">
+        <label>Description:</label>
+        <p>@Model.Description</p>
+    </div>
+
+    <div class="form-group">
+        <label>Image URL:</label>
+        <p>@Model.ImageUrl</p>
+    </div>
+
+    <div class="form-group">
+        <label>Rating:</label>
+        <p>@Model.Rating</p>
+    </div>
+
+    <div class="form-group">
+        <a asp-action="Edit" asp-route-id="@Model.MovieId" class="btn-submit">Edit</a>
+        <a asp-action="Index" class="btn-cancel">Back to List</a>
+    </div>
+</div>

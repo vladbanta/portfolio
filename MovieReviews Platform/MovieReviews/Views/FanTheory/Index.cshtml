@@ -1,0 +1,65 @@
+﻿@model IEnumerable<MovieReviews.Models.FanTheory>
+
+@{
+    ViewData["Title"] = "Fan Theories";
+}
+
+<nav>
+    <ul>
+        <li><a href="/Home/Index">Home</a></li>
+        <li><a href="/Movies">Movies</a></li>
+        <li><a href="/FanTheory">Fan Theories</a></li>
+        <li><a href="/MovieRequest">Request Movie</a></li>
+        <li><a href="/Home/About">About Us</a></li>
+        <li><a href="/Contact">Contact</a></li>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <li><a href="/Account/Logout">Logout (@User.Identity.Name)</a></li>
+        }
+        else
+        {
+            <li><a href="/Account/Login">Login</a></li>
+        }
+    </ul>
+</nav>
+
+<div class="container">
+    <h1>Fan Theories</h1>
+    <p>Explore some of the most interesting and mind-blowing fan theories about your favorite movies!</p>
+
+    @if (User.IsInRole("Admin"))
+    {
+        <div style="text-align: center; margin-bottom: 20px;">
+            <a class="btn btn-primary" asp-action="Create">Create New Theory</a>
+        </div>
+    }
+    @foreach (var theory in Model)
+    {
+        <div class="theory">
+            <img src="@theory.Movie?.ImageUrl" alt="@theory.Movie?.Title">
+            <div class="theory-details">
+                <h2>@theory.Title</h2>
+                <p><strong>Theory:</strong> @theory.Theory</p>
+                <p><strong>Why it might be true:</strong> @theory.Reason</p>
+
+                @if (User.IsInRole("Admin"))
+                {
+                    <div class="theory-actions">
+                        <a asp-action="Edit" asp-route-id="@theory.FanTheoryId">Edit</a> |
+                        <a asp-action="Delete" asp-route-id="@theory.FanTheoryId">Delete</a>
+                    </div>
+                }
+                @if (User.IsInRole("User"))
+                {
+                    <div class="theory-actions">
+                        <a asp-action="Details" asp-route-id="@theory.FanTheoryId">Details</a> |
+                </div>
+                }
+            </div>
+        </div>
+    }
+</div>
+
+<div class="footer">
+    <p>&copy; 2025 Movie Reviews. All rights reserved.</p>
+</div>

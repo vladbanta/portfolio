@@ -1,0 +1,76 @@
+﻿@model MovieReviews.Models.Movie
+
+@{
+    ViewData["Title"] = "Reviews for " + Model.Title;
+}
+
+<div class="container">
+    <h1>Reviews for @Model.Title</h1>
+
+    @if (Model.Reviews != null && Model.Reviews.Any())
+    {
+        <ul>
+            @foreach (var review in Model.Reviews)
+            {
+                <li>
+                    <strong>@review.ReviewerName</strong> a acordat
+                    <span class="rating">
+                        @{
+                            int fullStars = (int)Math.Floor(review.Rating / 2);
+                            bool hasHalfStar = (review.Rating / 2 - fullStars) >= 0.5;
+                            int emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+
+                            for (int i = 0; i < fullStars; i++)
+                            {
+                                @Html.Raw("★")
+                            }
+                            if (hasHalfStar)
+                            {
+                                @Html.Raw("⯨")
+                            }
+                            for (int i = 0; i < emptyStars; i++)
+                            {
+                                @Html.Raw("☆")
+                            }
+                        }
+                    </span>
+
+                    <p><strong>Review:</strong> @review.Content</p>
+
+                </li>
+            }
+        </ul>
+
+
+    }
+    else
+    {
+        <p>No reviews yet for this movie.</p>
+    }
+
+    <hr />
+    <h2>Leave a Review</h2>
+
+    <form asp-action="AddReview" asp-controller="Review" method="post" class="movie-form">
+        <input type="hidden" name="movieId" value="@Model.MovieId" />
+
+        <div class="form-group">
+            <label>Your Name</label>
+            <input name="reviewerName" type="text" required />
+        </div>
+
+        <div class="form-group">
+            <label>Rating (0–10)</label>
+            <input name="rating" type="number" step="0.1" min="0" max="10" required />
+        </div>
+
+        <div class="form-group">
+            <label>Your Review</label>
+            <textarea name="content" rows="4" required></textarea>
+        </div>
+
+        <button type="submit" class="btn-submit">Submit Review</button>
+        <a asp-controller="Movies" asp-action="Index" class="btn-cancel">Back to Movies</a>
+    </form>
+
+</div>

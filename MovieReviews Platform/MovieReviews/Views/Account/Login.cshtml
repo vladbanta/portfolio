@@ -1,0 +1,58 @@
+﻿@model MovieReviews.ViewModels.LoginViewModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="~/styles.css" />
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <ul>
+            
+            <li><a href="/Home/Index">Home</a></li>
+            <li><a href="/Movies">Movies</a></li>
+            <li><a href="/FanTheory">Fan Theories</a></li>
+            <li><a href="/MovieRequest">Request Movie</a></li>
+            <li><a href="/Home/About">About Us</a></li>
+            <li><a href="/Contact">Contact</a></li>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <li><a href="/Account/Logout">Logout (@User.Identity.Name)</a></li>
+            }
+            else
+            {
+                <li><a href="/Account/Login">Login</a></li>
+            }
+        </ul>
+    </nav>
+
+    <div class="auth-container">
+        <h2>Login to your account</h2>
+
+        <form asp-action="Login" method="post" class="auth-form">
+            <input asp-for="Email" placeholder="Email" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+
+            <input asp-for="Password" placeholder="Password" type="password" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+
+            <!-- Remember Me Checkbox - Fixed Alignment -->
+           
+
+            <button type="submit">Login</button>
+            <p>Don't have an account? <a href="/Account/Register">Register here</a>.</p>
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2025 Movie Reviews. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>

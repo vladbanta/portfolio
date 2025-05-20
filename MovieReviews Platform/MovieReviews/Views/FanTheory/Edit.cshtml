@@ -1,0 +1,54 @@
+﻿@model MovieReviews.Models.FanTheory
+
+@{
+    ViewData["Title"] = "Edit Fan Theory";
+}
+
+<nav>
+    <ul>
+        <li><a href="/index.html">Home</a></li>
+        <li><a href="/movies">Movies</a></li>
+        <li><a href="/fantheory">Fan Theories</a></li>
+        <li><a href="/movierequest">Request Movie</a></li>
+        <li><a href="/about.html">About Us</a></li>
+        <li><a href="/contact">Contact</a></li>
+        <li><a href="/login.html">Login</a></li>
+    </ul>
+</nav>
+
+<div class="container contact-container">
+    <h1 class="section-title">Edit Fan Theory</h1>
+
+    <form asp-action="Edit" method="post" class="contact-form">
+        <input type="hidden" asp-for="FanTheoryId" />
+
+        <div asp-validation-summary="All" class="text-danger"></div>
+
+        <label asp-for="Title">Theory Title</label>
+        <input asp-for="Title" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+
+        <label asp-for="Theory">Theory</label>
+        <textarea asp-for="Theory" rows="4"></textarea>
+        <span asp-validation-for="Theory" class="text-danger"></span>
+
+        <label asp-for="Reason">Why it might be true?</label>
+        <textarea asp-for="Reason" rows="4"></textarea>
+        <span asp-validation-for="Reason" class="text-danger"></span>
+
+        <label asp-for="MovieId">Related Movie</label>
+        <select asp-for="MovieId" asp-items="@(new SelectList(ViewBag.Movies, "MovieId", "Title"))">
+            <option value="">-- Select a movie --</option>
+        </select>
+        <span asp-validation-for="MovieId" class="text-danger"></span>
+
+        <div style="display: flex; gap: 10px; margin-top: 20px;">
+            <button type="submit" class="btn">Save Changes</button>
+            <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
