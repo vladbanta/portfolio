@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34616.47
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Game", "Game.vcxproj", "{B1CD6583-EAC5-4189-97F0-7F56AED712CF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+		Release2|Win32 = Release2|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B1CD6583-EAC5-4189-97F0-7F56AED712CF}.Debug|Win32.ActiveCfg = Release|Win32
+		{B1CD6583-EAC5-4189-97F0-7F56AED712CF}.Debug|Win32.Build.0 = Release|Win32
+		{B1CD6583-EAC5-4189-97F0-7F56AED712CF}.Release|Win32.ActiveCfg = Release|Win32
+		{B1CD6583-EAC5-4189-97F0-7F56AED712CF}.Release|Win32.Build.0 = Release|Win32
+		{B1CD6583-EAC5-4189-97F0-7F56AED712CF}.Release2|Win32.ActiveCfg = Release2|Win32
+		{B1CD6583-EAC5-4189-97F0-7F56AED712CF}.Release2|Win32.Build.0 = Release2|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
